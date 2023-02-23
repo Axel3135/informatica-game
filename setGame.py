@@ -10,21 +10,23 @@ class SetGame:
         pass
 
 class SetCard:
-    def __init__(self, amount, pattern, figure):
+    def __init__(self, amount, colour, pattern, shape):
         '''class voor het beheren van één set kaart
         amount is een int van 0-2 die de hoeveelheid vormpjes op de kaart aangeeft
         pattern is een str uit patterns die het patroon aangeeft van de vormpjes 
         figure is een str uit figures die de vorm van de kaart aangeeft.
         '''
+        colours = {"red":0, "green":1, "purple":2}
         patterns = {"empty":0, "striped":1, "fill":2}
-        figures = {"pill":0, "wave":1, "diamond":2}
+        shapes = {"pill":0, "wave":1, "diamond":2}
         self.amount = amount
+        self.colour = colours[colour]
         self.pattern = patterns[pattern]
-        self.figure = figures[figure]
+        self.shape = shapes[shape]
 
 
 class Player:
     def __init__(self):
         pass
-a = SetCard(0, 0, "wave")
+a = SetCard(0, "red", "empty", "wave")
 print(a.pattern)
