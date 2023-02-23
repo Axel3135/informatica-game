@@ -2,7 +2,7 @@
 import pygame
 
 
-WIDTH, HEIGHT = 800, 800
+WIDTH, HEIGHT = 800, 750
 ROWS, COLS = 5, 5
 AREA_SIZE = 100
 
@@ -11,3 +11,4 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 64, 0)
 BLUE = (0, 0, 255)
+BROWN = (70,22,22)

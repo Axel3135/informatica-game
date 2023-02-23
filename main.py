@@ -6,7 +6,7 @@ eventueel kunnen we dan later nog andere games toevogen, zoals uno door slechts 
 import pygame
 import numpy as np #Deze is waarschijnlijk wel nodig
 import random
-from set.constants import WIDTH, HEIGHT
+from set.constants import WIDTH, HEIGHT, BROWN
 from set.board import Board
 
 FPS = 60
@@ -28,8 +28,11 @@ def main():
                 run = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                pos = pygame.mouse.get_pos()
+                print("Click detected")
+                print(pos)
         board.draw_board(WIN)
+        board.create_board(WIN, BROWN, (50,50), (500,500))
         pygame.display.update()
 
     pygame.quit()
