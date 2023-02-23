@@ -6,28 +6,32 @@ eventueel kunnen we dan later nog andere games toevogen, zoals uno door slechts 
 import pygame
 import numpy as np #Deze is waarschijnlijk wel nodig
 import random
+from set.constants import WIDTH, HEIGHT
+from set.board import Board
 
-#pygame innit
+FPS = 60
+#pygame init
 pygame.init()
 
-#main loop
+WIN = pygame.display.set_mode((WIDTH,HEIGHT))
+pygame.display.set_caption("Set!")
 
-running = True
+def main():
+    run = True
+    clock = pygame.time.Clock()
+    board = Board()
+    while run:
+        clock.tick(FPS)
 
-while running:
-    screen = pygame.display.set_mode((600,500))
-    events = pygame.event.get()
-    for event in events:
-        if event.type == pygame.QUIT:
-            running = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
 
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pass
+        board.draw_board(WIN)
+        pygame.display.update()
 
-pygame.quit()
-    
+    pygame.quit()
 
-
-
-
-
-
-
+main()
