@@ -12,7 +12,7 @@ class SetGame:
         self.deck = self.fillDeck()
         self.shuffle()
         self.active_cards = list()
-        self.addCards(12)
+        self.addCards(81)
 
         print(self.active_cards)
         print(f"active: {len(self.active_cards)}")
@@ -29,10 +29,13 @@ class SetGame:
         shuffle(self.deck)
     
     def addCards(self, amount):
+        '''function that ads [amount] cards to the active cards'''
         self.active_cards.extend([self.deck[i] for i in range(amount)])
         del self.deck[0:amount]
 
     def isSet(self, card1, card2, card3):
+        '''funcition for checking if a set of three cards is a valid set or not.
+        '''
         if ((card1.amount == card2.amount and card2.amount == card3.amount) or (card1.amount != card2.amount and card2.amount != card3.amount and card3.amount != card1.amount)):
             if ((card1.colour == card2.colour and card2.colour == card3.colour) or (card1.colour != card2.colour and card2.colour != card3.colour and card3.colour != card1.colour)):
                 if ((card1.pattern == card2.pattern and card2.pattern == card3.pattern) or (card1.pattern != card2.pattern and card2.pattern != card3.pattern and card3.pattern != card1.pattern)):
