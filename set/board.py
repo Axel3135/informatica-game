@@ -1,5 +1,5 @@
 import pygame
-from .constants import GREEN, BROWN
+from .constants import *
 
 class Board:
     def __init__(self):
@@ -14,3 +14,8 @@ class Board:
 
     def create_board(self, win, color, pos1, pos2):
         pygame.draw.rect(win, color, (pos1,pos2))
+
+    def start_screen(self, win):
+        win.fill(WHITE)
+        win.blit(SET_LOGO, (50, 400))
+        win.blit(LOGO2, (WIDTH - 258, 400))

@@ -6,20 +6,23 @@ eventueel kunnen we dan later nog andere games toevogen, zoals uno door slechts 
 import pygame
 import numpy as np #Deze is waarschijnlijk wel nodig
 import random
-from set.constants import WIDTH, HEIGHT, BROWN
+from set.constants import *
 from set.board import Board
 
 FPS = 60
 #pygame init
 pygame.init()
+board = Board()
+start_game = False
 
 WIN = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Set!")
 
+
 def main():
     run = True
     clock = pygame.time.Clock()
-    board = Board()
+
     while run:
         clock.tick(FPS)
 
@@ -28,11 +31,15 @@ def main():
                 run = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                print("Click detected")
-                print(pos)
+                x, y = event.pos
+                if set_rect.collidepoint(x,y):
+                    print("Set! clicked!")
+                elif logo2_rect.collidepoint(x,y):
+                    print("4 in a row clicked!")
         board.draw_board(WIN)
-        board.create_board(WIN, BROWN, (50,50), (500,500))
+        board.start_screen(WIN)
+        
+            
         pygame.display.update()
 
     pygame.quit()
