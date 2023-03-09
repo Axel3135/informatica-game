@@ -18,5 +18,7 @@ SET_LOGO = pygame.image.load('assets/set_logo.png')
 LOGO = pygame.image.load('assets/4_rij_logo.png')
 LOGO2 = pygame.transform.scale(LOGO, (158, 158))
 
-set_rect = SET_LOGO.get_rect()
+#set_rect = SET_LOGO.get_rect()
 logo2_rect = LOGO2.get_rect()
+
+

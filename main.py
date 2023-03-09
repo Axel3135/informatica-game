@@ -8,6 +8,7 @@ import numpy as np #Deze is waarschijnlijk wel nodig
 import random
 from set.constants import *
 from set.board import Board
+from set.button import *
 
 FPS = 60
 #pygame init
@@ -31,10 +32,11 @@ def main():
                 run = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                x, y = event.pos
-                if set_rect.collidepoint(x,y):
+                pos = event.pos
+                print(pos)
+                if board.set_box.collidepoint(pos):
                     print("Set! clicked!")
-                elif logo2_rect.collidepoint(x,y):
+                elif board.four_box.collidepoint(pos):
                     print("4 in a row clicked!")
         board.draw_board(WIN)
         board.start_screen(WIN)

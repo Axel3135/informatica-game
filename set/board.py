@@ -19,3 +19,6 @@ class Board:
         win.fill(WHITE)
         win.blit(SET_LOGO, (50, 400))
         win.blit(LOGO2, (WIDTH - 258, 400))
+        #set.constants.set_rect.move(50,400)
+        #set.constants.logo2_rect.move(WIDTH - 258, 400)
+
