@@ -12,7 +12,7 @@ class SetGame:
         self.deck = self.fillDeck()
         self.shuffle()
         self.active_cards = list()
-        self.addCards(81)
+        self.addCards(12)
 
         print(self.active_cards)
         print(f"active: {len(self.active_cards)}")
@@ -76,7 +76,8 @@ class SetCard:
 
 class Player:
     def __init__(self):
-        pass
+        self.sets = list()
+        self.score = int()
 a1 = SetCard(0, "red", "empty", "wave")
 a2 = SetCard(0, "green", "striped", "diamond")
 a3 = SetCard(0, "purple", "fill", "pill")
