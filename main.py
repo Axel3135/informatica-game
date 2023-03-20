@@ -15,6 +15,7 @@ FPS = 60
 pygame.init()
 board = Board()
 start_game = False
+#Pepijn was here
 
 WIN = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Set!")
