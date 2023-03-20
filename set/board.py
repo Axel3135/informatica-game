@@ -17,8 +17,10 @@ class Board:
 
     def start_screen(self, win):
         win.fill(WHITE)
-        win.blit(SET_LOGO, (50, 400))
-        win.blit(LOGO2, (WIDTH - 258, 400))
+        set_rect.center = 50, 400
+        logo2_rect.center = 642, 400
+        win.blit(SET_LOGO, set_rect)
+        win.blit(LOGO2, logo2_rect)
         #set.constants.set_rect.move(50,400)
         #set.constants.logo2_rect.move(WIDTH - 258, 400)
 
