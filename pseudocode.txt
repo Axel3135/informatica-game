@@ -1,0 +1,7 @@
+import setgame
+maak een setboard object
+zet de list actieve kaarten om naar plaatjes op het scherm
+zorg dat drie kaarten geselecteeerd kunnen worden en geasigned aan een player
+check of drie kaarten een set is
+als set punten speler += 1
+overige game logic (kaarten aanvullen, end detect, geen set detect)
