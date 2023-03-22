@@ -8,7 +8,7 @@ class Board():
         print(self.board)
 
     def placeDisk(self, index, colour):
-        '''functie die disks plaatst in het board van boven naar beneden
+        '''functie die disks plaatst in het board van boven naar beneden (andersom dan zou moeten dus.)
         index is de list index van de kolom waarin de schijf geplaatst wordt
         colour is de kleur van de schijf, hier moet nog algemene notatie voor komen
         '''

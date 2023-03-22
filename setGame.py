@@ -6,7 +6,7 @@
     mogelijk een player class die kaarten, punten, highscore, etc per speler bijhoudt.
     '''
 from random import shuffle
-
+from PIL import Image
 class SetGame:
     def __init__(self):
         self.deck = self.fillDeck()
@@ -14,15 +14,15 @@ class SetGame:
         self.active_cards = list()
         self.addCards(12)
 
-        print(self.active_cards)
-        print(f"active: {len(self.active_cards)}")
-        print(len(self.deck))
+        #print(self.active_cards)
+        #print(f"active: {len(self.active_cards)}")
+        #print(len(self.deck))
 
     def fillDeck(self):
-        amounts = range(3)
-        colours = ["red", "green", "purple"]
-        patterns = ["empty", "striped", "fill"]
-        shapes = ["pill", "wave", "diamond"]
+        amounts = range(1, 4)
+        colours = ["R", "G", "P"]
+        patterns = ["E", "S", "F"]
+        shapes = ["P", "W", "D"]
         return [SetCard(i, j, k, l) for i in amounts for j in colours for k in patterns for l in shapes]  # maakt een deck met alle 81 verschillende kaarten
 
     def shuffle(self):
@@ -45,6 +45,7 @@ class SetGame:
     
     def checkForSet(self):
         '''function that checks for sets in the current active cards
+        returns a list of all sets in the active cards
         '''
         sets = list()
         for i in self.active_cards[0:-2]:
@@ -63,14 +64,20 @@ class SetCard:
         pattern is een str uit patterns die het patroon aangeeft van de vormpjes 
         figure is een str uit figures die de vorm van de kaart aangeeft.
         '''
-        colours = {"red":0, "green":1, "purple":2}
-        patterns = {"empty":0, "striped":1, "fill":2}
-        shapes = {"pill":0, "wave":1, "diamond":2}
+        colour = colour[0].upper() # leesbaar maken voor bijv. "red" ipv "R"
+        pattern = pattern[0].upper()
+        shape = shape[0].upper()
+        colours = {"R":0, "G":1, "P":2}
+        patterns = {"E":0, "S":1, "F":2}
+        shapes = {"P":0, "W":1, "D":2}
         self.amount = amount
         self.colour = colours[colour]
         self.pattern = patterns[pattern]
         self.shape = shapes[shape]
-        self.image = f"{amount}_{colour}_{pattern}_{shape}.png"
+        try:
+            self.image = Image.open(f"assets/individuele_kaarten/{colour}{shape}{pattern}{amount}.png")
+        except:
+            self.image = Image.open(f"assets/individuele_kaarten/{colour}{shape}{pattern}{amount}.jpg")
         self.properties = [self.amount, self.colour, self.pattern, self.shape]
 
 
@@ -78,14 +85,30 @@ class Player:
     def __init__(self):
         self.sets = list()
         self.score = int()
-a1 = SetCard(0, "red", "empty", "wave")
-a2 = SetCard(0, "green", "striped", "diamond")
-a3 = SetCard(0, "purple", "fill", "pill")
-print(a1.pattern)
+    
+#a1 = SetCard(1, "red", "empty", "wave")
+#a2 = SetCard(1, "green", "striped", "diamond")
+#a3 = SetCard(1, "purple", "fill", "pill")
+#print(a1.pattern)
 b = SetGame()
 bsets = b.checkForSet()
 for i in bsets:
     print(f"\nset: {bsets.index(i)}")
     for j in i:
         print(j.properties)
-print(b.isSet(a1, a2, a3))
+
+
+# pak 12 kaarten
+# wacht op klik
+# laat speler selecteren voor max 5 sec
+# check of het een set is
+# if set geef punt
+# else exclude speler
+# replace de 3 kaarten
+#
+# check of spel klaar is
+# if not klaar loop
+
+
+
+#print(b.isSet(a1, a2, a3))
