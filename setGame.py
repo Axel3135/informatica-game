@@ -7,6 +7,7 @@
     '''
 from random import shuffle
 from PIL import Image
+import pygame
 class SetGame:
     def __init__(self):
         self.deck = self.fillDeck()
@@ -75,9 +76,9 @@ class SetCard:
         self.pattern = patterns[pattern]
         self.shape = shapes[shape]
         try:
-            self.image = Image.open(f"assets/individuele_kaarten/{colour}{shape}{pattern}{amount}.png")
+            self.image = pygame.image.load(f"assets/individuele_kaarten/{colour}{shape}{pattern}{amount}.png")
         except:
-            self.image = Image.open(f"assets/individuele_kaarten/{colour}{shape}{pattern}{amount}.jpg")
+            self.image = pygame.image.load(f"assets/individuele_kaarten/{colour}{shape}{pattern}{amount}.jpg")
         self.properties = [self.amount, self.colour, self.pattern, self.shape]
 
 

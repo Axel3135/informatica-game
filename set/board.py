@@ -13,6 +13,7 @@ class Board:
         win.fill(GREEN)
         #maak tafel waarop de kaarten komen te liggen
         pygame.draw.rect(win, BROWN, (100,100,600,600))
+        
     def create_board(self, win, color, pos1, pos2):
         pygame.draw.rect(win, color, (pos1,pos2))
 

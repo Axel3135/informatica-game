@@ -6,9 +6,11 @@ eventueel kunnen we dan later nog andere games toevogen, zoals uno door slechts 
 import pygame
 import numpy as np #Deze is waarschijnlijk wel nodig
 import random
+from time import sleep
 from set.constants import *
 from set.board import Board
 from set.button import *
+from setGame import *
 
 FPS = 60
 #pygame init
@@ -22,7 +24,7 @@ pygame.display.set_caption("Set!")
 SET_LOGO = pygame.image.load('assets/set_logo.png')
 LOGO = pygame.image.load('assets/4_rij_logo.png')
 LOGO2 = pygame.transform.scale(LOGO, (158, 158))
-kaartdemo = pygame.image.load('Individuele_kaarten/GDE1.jpg')
+kaartdemo = pygame.image.load('assets/individuele_kaarten/GDE1.jpg')
 kaart = pygame.transform.scale(kaartdemo, (70,120)) #standaardmaten kaarten
 
 set_rect = SET_LOGO.get_rect()
@@ -43,10 +45,41 @@ def intro():
     WIN.blit(SET_LOGO, set_rect)
     WIN.blit(LOGO2, logo2_rect)
 
-
-def run_set():
+def init_set():
+    '''functie die het setspel beheert.
+    deze wordt aangeroepen door de mainloop.'''
+    widthx, heighty = 70, 120
+    startx, starty = 200, 200
+    margin = 10
+    #firstCard(200, 200)
     board.draw_board(WIN)
-    WIN.blit(kaart, kaart_rect)
+    SetBoard = SetGame()
+    cardIndex = 0
+    SetBoard.active_cards[0].image
+    for i in range(4):  # eens per ronde
+        for j in range(3):
+            # index --> i*3+j
+            set_demo_kaart = SetBoard.active_cards[(i*3+j)].image
+            set_kaart = pygame.transform.scale(set_demo_kaart, (70,120))
+            set_kaart_rect = set_kaart.get_rect()
+            set_kaart_rect.center = [startx+i*(widthx+margin), starty+j*(heighty+margin)]  # set center img
+            WIN.blit(set_kaart, set_kaart_rect)
+    sleep(1)
+    # zet active cards in goede rooster
+    
+    #clickedCards = []
+    #while len(clickedCards) <= 2:
+        
+
+    # import setgame
+    # maak een setboard object CHECK
+    # zet de list actieve kaarten om naar plaatjes op het scherm CHECK
+    # zorg dat drie kaarten geselecteeerd kunnen worden en geasigned aan een player (geef de geselecteerde kaarten aan) BEZIG
+    # check of drie kaarten een set is
+    # als set punten speler += 1
+    # overige game logic (kaarten aanvullen, end detect, geen set detect)
+    
+
     
 def main():
     run = True
@@ -78,8 +111,11 @@ def main():
         if starting == True:
             intro()
         else:
-            if selected == 'set':
-                run_set()
+            if selected == 'set_init':
+                init_set()
+                selected = set
+            elif selected == 'set':
+                pass
             elif selected == '4row':
                 pass
         
