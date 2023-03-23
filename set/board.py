@@ -4,10 +4,11 @@ from .constants import *
 class Board:
     def __init__(self):
         self.board = []
-        self.selected_card = None
         self.total_cards = 81
         self.cards_left = 81
-        
+        self.selected_cards = []
+        self.selected_rects = []
+        self.rect = []
 
     def draw_board(self, win):
         win.fill(GREEN)
@@ -16,6 +17,7 @@ class Board:
         
     def create_board(self, win, color, pos1, pos2):
         pygame.draw.rect(win, color, (pos1,pos2))
+
 
 '''
  def start_screen(self, win):

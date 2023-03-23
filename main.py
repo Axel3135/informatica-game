@@ -16,6 +16,7 @@ FPS = 60
 #pygame init
 pygame.init()
 board = Board()
+SetBoard = SetGame()
 start_game = False
 
 WIN = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -36,6 +37,7 @@ logo2_rect.center = 642, 400
 kaart_rect.center = 200, 200
 
 selected = None
+kaarten_rect = []
 
 def load_cards():
     pass
@@ -53,8 +55,6 @@ def init_set():
     margin = 10
     #firstCard(200, 200)
     board.draw_board(WIN)
-    SetBoard = SetGame()
-    cardIndex = 0
     SetBoard.active_cards[0].image
     for i in range(4):  # eens per ronde
         for j in range(3):
@@ -62,9 +62,10 @@ def init_set():
             set_demo_kaart = SetBoard.active_cards[(i*3+j)].image
             set_kaart = pygame.transform.scale(set_demo_kaart, (70,120))
             set_kaart_rect = set_kaart.get_rect()
+            
             set_kaart_rect.center = [startx+i*(widthx+margin), starty+j*(heighty+margin)]  # set center img
+            kaarten_rect.append(set_kaart_rect)
             WIN.blit(set_kaart, set_kaart_rect)
-    sleep(1)
     # zet active cards in goede rooster
     
     #clickedCards = []
@@ -78,10 +79,54 @@ def init_set():
     # check of drie kaarten een set is
     # als set punten speler += 1
     # overige game logic (kaarten aanvullen, end detect, geen set detect)
+
+def gameloopSet():
+    # selected cards licht maken Axel
+    for i in board.selected_cards:
+        index_in_active = SetBoard.active_cards.index(i)
+        kaart_rect = kaarten_rect[index_in_active]
+        geselecteerde_kaart = i.image
+        trans_kaart = pygame.transform.scale(geselecteerde_kaart, (75,129))
+        #pygame.transform.scale(geselecteerde_kaart, (75,129))
+        WIN.blit(trans_kaart, kaart_rect)
+        
+    if len(board.selected_cards) >= 3:
+        print('voldoende kaarten geselecteerd!')
+        print(board.selected_cards)
+        if SetBoard.isSet(board.selected_cards[0], board.selected_cards[1], board.selected_cards[2]):  # als het een set is:
+            print('HET IS EEN SET! HOERAAAAA')
+            for i in board.selected_cards: # verwijder uit active, vul dan aan
+                verplaatsen = kaarten_rect[SetBoard.active_cards.index(i)]
+                verplaatsen.center = -200, -200
+                kaarten_rect[0].center = -200, -200
+
+            for i in board.selected_cards:
+                SetBoard.active_cards.remove(i)
+            SetBoard.addCards(3)
+            '''for i in range(4):  # eens per ronde
+                for j in range(3):
+                    # index --> i*3+j
+                    set_demo_kaart = SetBoard.active_cards[(i*3+j)].image
+                    set_kaart = pygame.transform.scale(set_demo_kaart, (70,120))
+                    set_kaart_rect = set_kaart.get_rect()
+                    set_kaart_rect.center = [startx+i*(widthx+margin), starty+j*(heighty+margin)]  # set center img
+                    kaarten_rect.append(set_kaart_rect)'''
+                    
+            
+        else:
+            print('HET IS GEEN SET IDIOOT')
+        board.selected_cards = []
+
+    # selected cards als 3 doorgeven aan setGame CHECK
+    # check of set CHECK
+    # als set, verwijder kaarten en doe nieuwe kaarten
+    # als niet set penalty (fix later)
+    # 
     
 
     
 def main():
+    global selected
     run = True
     clock = pygame.time.Clock()
     starting = True
@@ -108,14 +153,27 @@ def main():
                     set_rect.center = -100,-100
                     logo2_rect.center = -100,-100
                     selected = '4row'
+                elif selected == 'set':
+                    print('klik op set scherm')
+                    for i in SetBoard.active_cards:  # check voor elke kaart of er op die kaart geklikt is
+                        if kaarten_rect[SetBoard.active_cards.index(i)].collidepoint(pos):
+                            print('kaart geklikt!')
+                            if not i in board.selected_cards:  # als je een tweede keer op een kaart klikt, gaat hij weer uit de lijst
+                                board.selected_cards.append(i)
+                            else:
+                                board.selected_cards.remove(i)
+                    #print(board.selected_cards[-1].amount)
+                    #for i in board.selected_cards:
+                    #    print(i.amount)
+
         if starting == True:
             intro()
         else:
             if selected == 'set_init':
                 init_set()
-                selected = set
+                selected = 'set'
             elif selected == 'set':
-                pass
+                gameloopSet()
             elif selected == '4row':
                 pass
         

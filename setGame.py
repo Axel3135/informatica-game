@@ -93,10 +93,10 @@ class Player:
 #print(a1.pattern)
 b = SetGame()
 bsets = b.checkForSet()
-for i in bsets:
-    print(f"\nset: {bsets.index(i)}")
-    for j in i:
-        print(j.properties)
+#for i in bsets:
+#    print(f"\nset: {bsets.index(i)}")
+#    for j in i:
+#        print(j.properties)
 
 
 # pak 12 kaarten
