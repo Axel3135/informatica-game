@@ -101,7 +101,7 @@ def main():
                     starting = False
                     set_rect.center = -100,-100
                     logo2_rect.center = -100,-100
-                    selected = 'set'
+                    selected = 'set_init'
                 elif logo2_rect.collidepoint(pos):
                     print("4 in a row clicked!")
                     starting = False
